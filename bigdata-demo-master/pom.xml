@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hzy</groupId>  <!--项目或组织的唯一标识-->
+  <artifactId>bigdata-demo</artifactId> <!--项目的通用名称-->
+  <packaging>pom</packaging>  <!--打包机制，如pom，jar，war，maven-plugin。。。-->
+  <version>1.0-SNAPSHOT</version> <!--项目的版本-->
+  <modules>
+    <module>kafka-demo</module>
+    <module>spark-demo</module>
+      <module>springboot-spark-demo</module>
+    <module>tools-demo</module>
+      <module>hadoop-demo</module>
+      <module>flume-custom</module>
+  </modules>
+
+  <name>bigdata-demo</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+      <!--
+          scope 依赖范围
+            compile：（默认）， 在编译期间有效，同时会被打包
+            provided:  已提供范围，即编译期间有效，但是不会被打包，比如servlet，在编译的时候需要，但是运行的时候由tomcat或其他容器提供，则不再需要打包到war里面
+            runtime: 编译的时候不需要，运行的时候才需要，比如编译的时候只需要jdbc api jar运行的时候才需要jdbc驱动实现
+            test: 测试范围。 编译和运行的时候都不需要，只要在测试编译和测试运行阶段可用
+            system：系统范围，必须同时提供一个系统路径，这种方式并不推荐，还是建议使用公开的库中的依赖
+      -->
+    </dependency>
+  </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>1.5.10.RELEASE</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.20.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
